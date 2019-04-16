@@ -70,4 +70,16 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
         cell.summeryLabel.text = summery
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        
+        let movie = movies[indexPath![1]]
+
+        let MovieDetailsVC = segue.destination as! MovieDetailsViewController
+        MovieDetailsVC.movie = movie
+        // unhilights the selected cell when you come back
+        tableView.deselectRow(at: indexPath!, animated: true)
+    }
 }
