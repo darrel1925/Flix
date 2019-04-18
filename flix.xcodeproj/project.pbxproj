@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A11031E225B19970091B67D /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A11031D225B19970091B67D /* MovieCell.swift */; };
+		9A8D468822669D740077FF28 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8D468722669D740077FF28 /* SettingsTableViewController.swift */; };
 		9A8DCE852264F36F00936949 /* MovieGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DCE822264F36F00936949 /* MovieGridViewController.swift */; };
 		9A8DCE862264F36F00936949 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DCE832264F36F00936949 /* MoviesViewController.swift */; };
 		9A8DCE872264F36F00936949 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DCE842264F36F00936949 /* MovieDetailsViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		9A11031D225B19970091B67D /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieCell.swift; path = ../flix/MovieCell.swift; sourceTree = "<group>"; };
+		9A8D468722669D740077FF28 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = Views/SettingsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		9A8DCE822264F36F00936949 /* MovieGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieGridViewController.swift; path = flix/MovieGridViewController.swift; sourceTree = SOURCE_ROOT; };
 		9A8DCE832264F36F00936949 /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviesViewController.swift; path = flix/MoviesViewController.swift; sourceTree = SOURCE_ROOT; };
 		9A8DCE842264F36F00936949 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetailsViewController.swift; path = flix/MovieDetailsViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -66,6 +68,7 @@
 		9A8DCE782264F08A00936949 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A8D468722669D740077FF28 /* SettingsTableViewController.swift */,
 				9A8DCE96226551F700936949 /* TrailerViewController.swift */,
 				9A8DCE842264F36F00936949 /* MovieDetailsViewController.swift */,
 				9A8DCE822264F36F00936949 /* MovieGridViewController.swift */,
@@ -279,6 +282,7 @@
 				9A98C32222599F5900192620 /* AppDelegate.swift in Sources */,
 				9A8DCE97226551F700936949 /* TrailerViewController.swift in Sources */,
 				9A11031E225B19970091B67D /* MovieCell.swift in Sources */,
+				9A8D468822669D740077FF28 /* SettingsTableViewController.swift in Sources */,
 				9A8DCE862264F36F00936949 /* MoviesViewController.swift in Sources */,
 				9A8DCE9222651DF900936949 /* MovieGridCell.swift in Sources */,
 				9A8DCE852264F36F00936949 /* MovieGridViewController.swift in Sources */,

@@ -26,7 +26,16 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        if let darkModeOn = UserDefaults.standard.object(forKey: "darkModeOn") {
+            
+            
+            if (darkModeOn as! Bool == true) {
+                enableDarkMode()
+            }
+            else {
+                disableDarkMode()
+            }
+        }
         
         titleLabel.text = movie["title"] as? String ?? movie["original_title"] as? String
         summeryLabel.text = movie["overview"] as? String
@@ -67,7 +76,7 @@ class MovieDetailsViewController: UIViewController {
 
         makeNetworkRequest(movieAPIURL: movieAPIURL)
         
-        //        let baseYoutubeURL = "htpps://youtube/watchv?="
+        //let baseYoutubeURL = "htpps://youtube/watchv?="
         
         //print(self.videoAPI)
         //let videoID = self.videoAPI["id"]
@@ -89,8 +98,7 @@ class MovieDetailsViewController: UIViewController {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let d = dataDictionary["results"] as! [[String:Any]]
                 print(d[0])
-                print(d[0]["id"])
-                self.movieKey = d[0]["key"] as! String
+                self.movieKey = (d[0]["key"] as! String)
                 
       ///          self.videoAPI = d[0]
     //            self.setTrailer(id: d[0]["key"]! as! String)
@@ -104,5 +112,20 @@ class MovieDetailsViewController: UIViewController {
         
         TrailerVC.movieKey = self.movieKey
     }
+    
+    func enableDarkMode() {
+        titleLabel.textColor = .white
+        summeryLabel.backgroundColor = .black
+        summeryLabel.textColor = .white
+        summeryLabel.reloadInputViews()
+        view.backgroundColor = .black
+    }
 
+    func disableDarkMode() {
+        titleLabel.textColor = .black
+        summeryLabel.backgroundColor = .white
+        summeryLabel.textColor = .black
+        summeryLabel.reloadInputViews()
+        view.backgroundColor = .white
+    }
 }

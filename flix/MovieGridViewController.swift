@@ -13,22 +13,32 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var mov = [[String:Any]]()
     var movies = [[String:Any]]()
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let darkModeOn = UserDefaults.standard.object(forKey: "darkModeOn") {
+            if (darkModeOn as! Bool == true) {
+                enableDarkMode()
+            }
+            else {
+                print("Going to diableDarkMode")
+                disableDarkMode()
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        // what you use to configure the latour of MovieGrid
+        // what you use to configure the layout of MovieGrid
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = 4
         layout.minimumInteritemSpacing = 4
         
         let width = (view.frame.size.width - layout.minimumLineSpacing * 2) / 3
-        
-        
         
         layout.itemSize = CGSize(width: width , height: width * 3 / 2)
         //let length = view.frame.size.height
@@ -40,15 +50,16 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let task = session.dataTask(with: request) { (data, response, error) in
             // This will run when the network request returns
             if let error = error {
-//                print(error.localizedDescription)
+                print(error.localizedDescription)
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 //print(dataDictionary)
                 
-                self.movies = dataDictionary["results"] as! [[String:Any]]
+                self.mov = dataDictionary["results"] as! [[String:Any]]
                 
+                self.movies = self.mov.sorted(by: ({ ($0["original_title"] as! String) < ($1["original_title"] as! String )}) )
 //                print(self.movies[0]["title"] ?? "ERROR HAPPENED")
-                
+                ["original_title"].count
                 
                 self.collectionView.reloadData()
             }
@@ -72,15 +83,44 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
 
         cell.posterView.af_setImage(withURL: finalURL!)
         
+        if let darkModeOn = UserDefaults.standard.object(forKey: "darkModeOn") {
+            if (darkModeOn as! Bool == true) {
+                print("DARKK MODEEEEE")
+                cell.backgroundColor = .black
+            }
+            else {
+                print("LIGHT MODEEEEE")
+                cell.backgroundColor = .white
+            }
+        }
+        
         return cell
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let MovieDetailsVC = segue.destination as! MovieDetailsViewController
-        let cell = sender as! UICollectionViewCell
-        let indexPath = collectionView.indexPath(for: cell)
-        let movie = self.movies[indexPath!.item]
+        if segue.identifier == "toDetailsController"{
         
-        MovieDetailsVC.movie = movie
+            let MovieDetailsVC = segue.destination as! MovieDetailsViewController
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPath(for: cell)
+            let movie = self.movies[indexPath!.item]
+        
+            MovieDetailsVC.movie = movie
+        }
+        else if segue.identifier == "toSettingsController"{
+            print("Hey, this worked Great!")
+        }
+    }
+    
+    func disableDarkMode() {
+        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
+        collectionView.reloadData()
+    }
+    
+    func enableDarkMode() {
+        view.backgroundColor = .black
+        collectionView.backgroundColor = .black
+        collectionView.reloadData()
     }
 }
