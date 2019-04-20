@@ -6,6 +6,7 @@
 //  Copyright © 2019 Darrel Muonekwu. All rights reserved.
 //
 //
+// MARK: setNeedsStatusBarAppearsUpdate
 
 import UIKit
 import AlamofireImage
@@ -16,7 +17,11 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
     
     // array of dictionaries with key as string and values and any
     var movies = [[String:Any]]()
+    var isDeafultStatusBar = true
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isDeafultStatusBar ? .default : .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +31,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
         print("NETWORK REQUEST STARTED")
         makeNetworkRequest()
         
+        print("VIEW LOAD")
+        
         }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("VIEW APPEAR")
         if let darkModeOn = UserDefaults.standard.object(forKey: "darkModeOn") {
             
             if (darkModeOn as! Bool == true) {
@@ -107,9 +115,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
                 
                 self.movies = dataDictionary["results"] as! [[String:Any]]
                 
-                print(self.movies[0]["title"] ?? "ERROR HAPPENED")
                 self.tableView.reloadData()
-                
+//                print(self.movies[0]["title"] ?? "ERROR HAPPENED")
                 print("NETWORK REQUEST FINISHED")
                 
                 // TODO: Get the array of movies
@@ -125,6 +132,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
         // change NavBar title color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().barTintColor = .black
+    
         
         // views background color
         self.view.backgroundColor = UIColor.black
@@ -136,6 +144,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate,  UITableViewD
     func disableDarkMode() {
         // change NavBar title color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+
         UINavigationBar.appearance().barTintColor = .white
         
         // views background color

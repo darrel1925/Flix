@@ -26,6 +26,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
                 disableDarkMode()
             }
         }
+        
+    setUserDefaults()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,14 +115,33 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func disableDarkMode() {
+        
+        // change NavBar title color
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        
+        UINavigationBar.appearance().barTintColor = .white
+        
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
         collectionView.reloadData()
     }
     
     func enableDarkMode() {
+        
+        // change NavBar title color
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().barTintColor = .black
+        
         view.backgroundColor = .black
         collectionView.backgroundColor = .black
         collectionView.reloadData()
+    }
+    
+    func setUserDefaults() {
+        if UserDefaults.standard.object(forKey: "genre") == nil {
+            //Avngrs Endgame          Dumbo
+            let movieGenres: [String:String] = ["superhero": "299534","kids":"329996", "romance":  "", "action":""]
+            UserDefaults.standard.set("299534", forKey: "genre")
+        }
     }
 }
