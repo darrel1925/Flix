@@ -12,8 +12,7 @@
 
 ### App Walkthough GIF
 
-<img src="http://g.recordit.co/WSLEWsdocJ.gif" width=250>
-<img src="http://g.recordit.co/XTR9iO0HUu.gif" width=250><br>
+<img src="http://g.recordit.co/WSLEWsdocJ.gif" width=200> <img src="http://g.recordit.co/XTR9iO0HUu.gif" width=200><br>
 
 ### Notes
 - I had trouble changing the color of the tab bar for a light and dark mode
